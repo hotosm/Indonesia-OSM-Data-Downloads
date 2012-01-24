@@ -2,9 +2,15 @@
 
 # Get the current date so we can append it to filenames
 cur_date=`date +%y%m%d`
-data_dir="/Users/wonderchook/projects/exports_indo/"
+data_dir="~/Indonesia-OSM-Data-Downloads/"
 osm_file=$data_dir"indonesia.osm"
-distribution_dir="/Users/wonderchook/projects/exports_indo/"
+distribution_dir="~/Indonesia-OSM-Data-Downloads"
+
+echo "Downloading indonesia osm xml file"
+cd "~/Indonesia-OSM-Data-Downloads"
+wget http://download.geofabrik.de/osm/asia/indonesia.osm.bz2 -O indonesia.osm.bz2
+bunzip2 indonesia.osm.bz2
+
 
 cd $data_dir
 mkdir osm_extracts

@@ -24,11 +24,14 @@ mkdir shp_extracts/water
 
 ### Now do buildings
 # Building Points
-osmosis --read-xml $osm_file --tf accept-nodes building=yes --tf reject-ways --tf reject-relations --write-xml osm_extracts/building-points.osm
-osmexport oxr_files/buildings/building-points.oxr osm_extracts/building-points.osm shp_extracts/building-points
+#osmosis --read-xml $osm_file --tf accept-nodes building=yes --tf reject-ways --tf reject-relations --write-xml osm_extracts/building-points.osm
+#osmexport oxr_files/buildings/building-points.oxr osm_extracts/building-points.osm shp_extracts/building-points
 # Building Polygons
-osmosis --read-xml $osm_file --tf accept-ways building=yes --tf reject-relations --used-node --write-xml osm_extracts/building-polygons.osm
+osmosis --read-xml $osm_file --tf accept-ways building=yes --bounding-box top=-8.014 left=116.472 bottom=-9.038 right=119.135 --tf reject-relations --used-node --write-xml osm_extracts/building-polygons.osm
 osmexport oxr_files/buildings/building-polygons.oxr osm_extracts/building-polygons.osm shp_extracts/building-polygons
+
+#osmosis --read-xml $osm_file --tf accept-ways building=yes --tf reject-relations --used-node --write-xml osm_extracts/building-sumbawa.osm --bounding-box top=-8.159 left=116.753 bottom=-8.879 right=119.458
+#osmexport oxr_files/buildings/building-polygons.oxr osm_extracts/building-sumbawa.osm shp_extracts/building-polygons
 
 #osmosis --read-xml $osm_file --tf accept-nodes building=yes --tf reject-ways --tf reject-relations --write-xml osm_extracts/building-points.osm
 #mkdir shp_extracts/building-points
