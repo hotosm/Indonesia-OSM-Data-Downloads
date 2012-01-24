@@ -7,7 +7,7 @@ osm_file=$data_dir"indonesia.osm"
 distribution_dir="~/Indonesia-OSM-Data-Downloads"
 
 echo "Downloading indonesia osm xml file"
-cd "~/Indonesia-OSM-Data-Downloads"
+cd ~/Indonesia-OSM-Data-Downloads
 wget http://download.geofabrik.de/osm/asia/indonesia.osm.bz2 -O indonesia.osm.bz2
 bunzip2 indonesia.osm.bz2
 
