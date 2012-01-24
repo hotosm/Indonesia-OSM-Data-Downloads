@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Get the current date so we can append it to filenames
+cur_date=`date +%y%m%d`
+data_dir="/Users/wonderchook/projects/exports_indo/"
+osm_file=$data_dir"indonesia.osm"
+distribution_dir="/Users/wonderchook/projects/exports_indo/"
+
+cd $data_dir
+mkdir osm_extracts
+mkdir shp_extracts
+mkdir shp_extracts/pois
+mkdir shp_extracts/building-points
+mkdir shp_extracts/building-polygons
+mkdir shp_extracts/roads
+mkdir shp_extracts/rail
+mkdir shp_extracts/water
+
+################################################
+# Filter planet.osm according to different themes
+################################################
+### First filter POIs by type
+# Accomodation
+
+### Now do buildings
+# Building Points
+osmosis --read-xml $osm_file --tf accept-nodes building=yes --tf reject-ways --tf reject-relations --write-xml osm_extracts/building-points.osm
+osmexport oxr_files/buildings/building-points.oxr osm_extracts/building-points.osm shp_extracts/building-points
+# Building Polygons
+osmosis --read-xml $osm_file --tf accept-ways building=yes --tf reject-relations --used-node --write-xml osm_extracts/building-polygons.osm
+osmexport oxr_files/buildings/building-polygons.oxr osm_extracts/building-polygons.osm shp_extracts/building-polygons
+
+#osmosis --read-xml $osm_file --tf accept-nodes building=yes --tf reject-ways --tf reject-relations --write-xml osm_extracts/building-points.osm
+#mkdir shp_extracts/building-points
+#osmexport oxr_files/building-points.oxr osm_extracts/building-points.osm shp_extracts/building-points
+
+#osmosis --read-xml $osm_file --tf accept-ways building=yes --tf reject-relations --used-node --write-xml osm_extracts/building-polygons.osm
+#mkdir shp_extracts/building-polygons
+#osmexport oxr_files/building-polygons.oxr osm_extracts/building-polygons.osm shp_extracts/building-polygons
+
+# Zip and move shapefiles to download directory
+#cd ~/data/shp_extracts
+#zip building-poly.zip building-polygons/*
+#rm /var/www/data/building-poly.zip
+#mv building-poly.zip /var/www/data
+
+#zip building-point.zip building-points/*
+#rm /var/www/data/building-point.zip
+#mv building-point.zip /var/www/data
