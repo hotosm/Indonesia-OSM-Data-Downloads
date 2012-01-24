@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Get the current date so we can append it to filenames
+cur_date=`date +%y%m%d`
+data_dir="/Users/wonderchook/projects/exports_indo/"
+osm_file=$data_dir"indonesia.osm"
+distribution_dir="/Users/wonderchook/projects/exports_indo/"
+
+cd $data_dir
+mkdir osm_extracts
+mkdir shp_extracts
+mkdir shp_extracts/pois
+mkdir shp_extracts/building-points
+mkdir shp_extracts/building-polygons
+mkdir shp_extracts/roads
+mkdir shp_extracts/rail
+mkdir shp_extracts/water
+
+################################################
+# Filter planet.osm according to different themes
+################################################
+### First filter POIs by type
+# Accomodation
+
+osmosis --read-xml $osm_file --tf accept-ways building=yes --bounding-box top=-8.014 left=116.472 bottom=-9.038 right=119.135 --tf reject-relations --used-node --write-xml osm_extracts/building-polygons.osm
+osmexport oxr_files/buildings/building-polygons.oxr osm_extracts/building-polygons.osm shp_extracts/building-polygons

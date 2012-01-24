@@ -1,0 +1,19 @@
+setup :Shp do
+    polygon :building do
+	string :name, 50
+	string :use, 25
+	string :structure, 25
+        string :walls, 20
+        string :roof, 20
+	string :levels,10
+	string :user, 25
+	string :timestamp, 30
+	string :id, 15
+    end
+end
+
+ways do
+    if building == "yes"
+        :building << { :name => tags['name'], :use => tags['building:use'], :structure => tags['building:structure'], :walls => tags['building:walls'], :roof => tags['building:roof'], :levels => tags['building:levels'], :user => user, :timestamp => timestamp, :id => id }
+    end
+end
